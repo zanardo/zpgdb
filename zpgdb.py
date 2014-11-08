@@ -12,6 +12,7 @@ HOST = PORT = DB = USER = PASS = None
 _local = threading.local()
 
 def getdb():
+    "Return a database connection object. Reuse connections on same thread"
     if not hasattr(_local, 'dbh'):
         _local.dbh = psycopg2.connect(host=HOST, port=PORT,
             database=DB, user=USER, password=PASS)
