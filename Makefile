@@ -1,4 +1,4 @@
-.PHONY: all clean test
+.PHONY: all clean test clean-setuptools
 
 all: venv
 
@@ -9,8 +9,11 @@ venv: .venv/bin/activate
 	. .venv/bin/activate; pip install -r requirements.txt
 	touch .venv/bin/activate
 
-clean:
-	rm -rf *.pyc .venv dist zpgdb.egg-info
+clean-setuptools:
+	rm -rf dist zpgdb.egg-info build
+
+clean: clean-setuptools
+	rm -rf *.pyc .venv
 
 test: venv
 	.venv/bin/python tests.py
