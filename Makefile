@@ -1,3 +1,5 @@
+.PHONY: all clean test
+
 all: venv
 
 venv: .venv/bin/activate
