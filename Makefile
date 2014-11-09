@@ -10,8 +10,7 @@ venv: .venv/bin/activate
 	touch .venv/bin/activate
 
 clean:
-	rm -f *.pyc
-	rm -rf .venv
+	rm -rf *.pyc .venv dist zpgdb.egg-info
 
 test: venv
 	.venv/bin/python tests.py
