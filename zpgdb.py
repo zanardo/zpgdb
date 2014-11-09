@@ -10,6 +10,9 @@ import psycopg2.extensions
 import threading
 from contextlib import contextmanager
 
+__VERSION__ = '0.1'
+__AUTHOR__ = 'Antonio Zanardo <zanardo@gmail.com>'
+
 _HOST = _PORT = _DB = _USER = _PASS = None
 
 _local = threading.local()
