@@ -35,6 +35,7 @@ def getdb():
 
 @contextmanager
 def trans():
+    "Context manager to encapsulate transaction control"
     open_trans = False
     dbh = getdb()
     if dbh.get_transaction_status() != psycopg2.extensions.TRANSACTION_STATUS_IDLE:
