@@ -22,13 +22,6 @@ from uuid import uuid4
 def rand():
     return 'tmp_' + str(uuid4()).replace('-', '')
 
-db.HOST = tests_config.HOST
-db.PORT = tests_config.PORT
-db.USER = tests_config.USER
-db.PASS = tests_config.PASS
-db.DB = tests_config.DB
-
-
 class TestDb(unittest.TestCase):
 
     def test_getdb(self):
@@ -71,4 +64,6 @@ class TestDb(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    db.config_connection(tests_config.HOST, tests_config.PORT,
+        tests_config.USER, tests_config.PASS, tests_config.DB)
     unittest.main()

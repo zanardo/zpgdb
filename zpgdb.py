@@ -10,15 +10,23 @@ import psycopg2.extensions
 import threading
 from contextlib import contextmanager
 
-HOST = PORT = DB = USER = PASS = None
+_HOST = _PORT = _DB = _USER = _PASS = None
 
 _local = threading.local()
+
+def config_connection(host, port, database, user, password):
+    global _HOST, _PORT, _DB, _USER, _PASS
+    _HOST = host
+    _PORT = port
+    _DB = database
+    _USER = user
+    _PASS = password
 
 def getdb():
     "Return a database connection object. Reuse connections on same thread"
     if not hasattr(_local, 'dbh'):
-        _local.dbh = psycopg2.connect(host=HOST, port=PORT,
-            database=DB, user=USER, password=PASS,
+        _local.dbh = psycopg2.connect(host=_HOST, port=_PORT,
+            database=_DB, user=_USER, password=_PASS,
             cursor_factory=psycopg2.extras.DictCursor)
     return _local.dbh
 
