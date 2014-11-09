@@ -9,6 +9,10 @@ Database connections are reused and one connection is opened by thread. Only
 one connection type is permitted at this time (eg, the same host, port, user and
 password and database).
 
+## How to install
+
+	pip install zpgdb==0.1
+
 ## How to use
 
 	# You can import the module on every package/module you want to share
