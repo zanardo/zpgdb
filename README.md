@@ -19,7 +19,8 @@ password and database).
 	# inside your __main__ block.
 	db.config_connection(host, port, user, password, database)
 
-	# You can get the connection object directly:
+	# You can get the connection object directly. `getdb()` will start a
+	# new connection if there is no connection opened with the actual thread.
 	dbh = db.getdb()
 
 	# Or you can start a context manager getting a cursor, with automatic
