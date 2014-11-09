@@ -2,3 +2,6 @@
 **.pyc
 .venv/
 tests_config.py
+dist/
+build/
+zpgdb.egg-info/
