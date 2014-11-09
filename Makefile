@@ -11,5 +11,5 @@ clean:
 	rm -f *.pyc
 	rm -rf .venv
 
-tests: venv
+test: venv
 	.venv/bin/python tests.py
