@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name = "zpgdb",
-    version = "0.1",
+    version = "0.2",
     packages = ['zpgdb'],
     install_requires = ['psycopg2==2.5.4'],
     package_data = {
