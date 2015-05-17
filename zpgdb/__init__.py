@@ -17,13 +17,13 @@ _HOST = _PORT = _DB = _USER = _PASS = None
 
 _local = threading.local()
 
-def config_connection(host, port, database, user, password):
+def config_connection(host, port, user, password, database):
     global _HOST, _PORT, _DB, _USER, _PASS
     _HOST = host
     _PORT = port
-    _DB = database
     _USER = user
     _PASS = password
+    _DB = database
 
 def getdb():
     "Return a database connection object. Reuse connections on same thread"
