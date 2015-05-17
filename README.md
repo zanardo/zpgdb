@@ -11,7 +11,7 @@ password and database).
 
 ## How to install
 
-	pip install zpgdb==0.1
+	pip install zpgdb==0.2
 
 ## How to use
 
