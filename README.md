@@ -9,6 +9,10 @@ Database connections are reused and one connection is opened by thread. Only
 one connection type is permitted at this time (eg, the same host, port, user and
 password and database).
 
+Persistent connections are tested before used for commands, and they are
+automatically reopened in case they were lost, dealing with PostgreSQL
+restarts transparently.
+
 ## How to install
 
 	pip install zpgdb==0.2
