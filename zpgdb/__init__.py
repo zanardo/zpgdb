@@ -79,9 +79,10 @@ def trans():
                 c.execute('select 1')
                 c.fetchone()
             except psycopg2.Error:
+                log.debug("database connection is lost")
+                log.exception("exception: ")
                 deldbh()
                 tries += 1
-                log.debug("database connection is lost")
             else:
                 break
 
