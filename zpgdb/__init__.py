@@ -118,10 +118,3 @@ def trans():
         if _local.trans == 0:
             dbh.commit()
             log.debug("commiting")
-    finally:
-        try:
-            c.close()
-        except psycopg2.Error:
-            log.debug("error trying to close cursor")
-            pass
-
