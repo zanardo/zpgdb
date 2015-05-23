@@ -2,10 +2,12 @@
 
 from setuptools import setup
 
+from zpgdb import __VERSION__
+
 setup(
     name = "zpgdb",
-    version = "0.2",
-    packages = ['zpgdb'],
+    version = __VERSION__,
+    py_modules = ['zpgdb'],
     install_requires = ['psycopg2==2.5.5'],
     package_data = {
         '': ['README.md', 'COPYING']
