@@ -13,13 +13,18 @@ from time import sleep
 import psycopg2
 import psycopg2.extras
 
-logging.basicConfig(level=logging.WARNING, format='%(asctime)s.%(msecs)03d | '
-    'zpgdb | %(threadName)s | %(message)s', datefmt='%Y/%m/%d %H:%M:%S')
 log = logging.getLogger(__name__)
+logFormat = logging.Formatter(
+    fmt='%(asctime)s.%(msecs)03d %(levelname).3s | %(name)s | %(message)s',
+    datefmt='%Y/%m/%d %H:%M:%S')
+log.setLevel(logging.WARNING)
+logHandler = logging.StreamHandler()
+logHandler.setFormatter(logFormat)
+log.addHandler(logHandler)
 
 #log.setLevel(logging.DEBUG)
 
-__VERSION__ = '0.2'
+__VERSION__ = '0.3'
 __AUTHOR__ = 'Antonio Zanardo <zanardo@gmail.com>'
 
 _HOST = _PORT = _DB = _USER = _PASS = None
