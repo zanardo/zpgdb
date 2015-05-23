@@ -15,7 +15,7 @@ restarts transparently.
 
 ## How to install
 
-	pip install zpgdb==0.2
+	pip install zpgdb
 
 ## How to use
 
