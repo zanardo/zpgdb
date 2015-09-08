@@ -24,7 +24,7 @@ log.addHandler(logHandler)
 
 #log.setLevel(logging.DEBUG)
 
-__VERSION__ = '0.3'
+__VERSION__ = '0.4'
 __AUTHOR__ = 'Antonio Zanardo <zanardo@gmail.com>'
 
 _HOST = _PORT = _DB = _USER = _PASS = None
