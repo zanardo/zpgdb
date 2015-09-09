@@ -1,12 +1,21 @@
 # -*- coding: utf-8 -*-
 
+import re
+
 from setuptools import setup
 
-from zpgdb import __VERSION__
+# argh!
+version = ''
+with open('zpgdb.py', 'r') as fp:
+    version = re.search(r"^__VERSION__ = '(.+?)'$", fp.read(),
+                        re.MULTILINE).group(1)
+if not version:
+    raise RuntimeError(u"Error getting version!")
+
 
 setup(
     name = "zpgdb",
-    version = __VERSION__,
+    version = version,
     py_modules = ['zpgdb'],
     install_requires = ['psycopg2==2.6.1'],
     package_data = {
