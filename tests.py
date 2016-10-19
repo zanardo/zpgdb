@@ -35,7 +35,7 @@ class TestDb(unittest.TestCase):
         self.assertFalse(dbh1.closed)
         dbh2 = db.getdb()
         self.assertFalse(dbh2.closed)
-        self.assertEquals(dbh1, dbh2)
+        self.assertEqual(dbh1, dbh2)
 
     def test_trans(self):
         "Test transaction with commit"
@@ -46,7 +46,7 @@ class TestDb(unittest.TestCase):
         with db.trans() as c:
             c.execute("select test from " + tbl + " limit 1")
             r = c.fetchone()
-            self.assertEquals(r[0], 'test')
+            self.assertEqual(r[0], 'test')
 
     def test_trans_rollback(self):
         "Test transaction with rollback"
