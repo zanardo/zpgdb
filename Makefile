@@ -1,19 +1,18 @@
-.PHONY: all clean test clean-setuptools
+PYTHON=python3
 
-all: venv
+all: .venv
 
-venv: .venv/bin/activate
+.venv: setup.py
+	@test -d .venv || virtualenv -p $(PYTHON) .venv
+	@.venv/bin/pip install -e .
+	@touch .venv
 
-.venv/bin/activate: requirements.txt
-	test -d .venv || virtualenv -p python2.7 .venv
-	. .venv/bin/activate; pip install -r requirements.txt
-	touch .venv/bin/activate
+clean:
+	@rm -rf .venv/ build/ dist/ *.egg-info/
+	@find . -type f -name '*.pyc' -delete
+	@find . -type d -name '__pycache__' -delete
 
-clean-setuptools:
-	rm -rf dist zpgdb.egg-info build
-
-clean: clean-setuptools
-	rm -rf *.pyc .venv
-
-test: venv
+test: .venv
 	.venv/bin/python tests.py
+
+.PHONY: all clean test
