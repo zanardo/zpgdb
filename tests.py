@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
 # To run these tests, first create a file named tests_config.py, with
 # configurations pointing to a PostgreSQL database used for the tests
 # (the database will be modified!), with this syntax:
@@ -41,7 +38,7 @@ class TestDb(unittest.TestCase):
         "Test transaction with commit"
         tbl = rand()
         with db.trans() as c:
-            c.execute("create table " + tbl  + " (test text)")
+            c.execute("create table " + tbl + " (test text)")
             c.execute("insert into " + tbl + " values ('test')")
         with db.trans() as c:
             c.execute("select test from " + tbl + " limit 1")
@@ -52,7 +49,7 @@ class TestDb(unittest.TestCase):
         "Test transaction with rollback"
         tbl = rand()
         with db.trans() as c:
-            c.execute("create table " + tbl  + " (test text)")
+            c.execute("create table " + tbl + " (test text)")
         with self.assertRaises(psycopg2.DataError):
             with db.trans() as c:
                 c.execute("insert into " + tbl + " values ('test')")
@@ -64,6 +61,7 @@ class TestDb(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    db.config_connection(tests_config.HOST, tests_config.PORT,
+    db.config_connection(
+        tests_config.HOST, tests_config.PORT,
         tests_config.USER, tests_config.PASS, tests_config.DB)
     unittest.main()

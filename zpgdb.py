@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """This module provides a thin wrapper to access a PostgreSQL database,
 with functions to create a connection per thread, context managers to
 wrap transactions, dealing with disconnects, etc"""
@@ -22,7 +20,7 @@ logHandler = logging.StreamHandler()
 logHandler.setFormatter(logFormat)
 log.addHandler(logHandler)
 
-#log.setLevel(logging.DEBUG)
+# log.setLevel(logging.DEBUG)
 
 __VERSION__ = '0.4.1'
 __AUTHOR__ = 'Antonio Zanardo <zanardo@gmail.com>'
@@ -47,7 +45,8 @@ def config_connection(host, port, user, password, database):
 def getdb():
     if not hasattr(_local, 'dbh'):
         log.debug("opening a new database connection")
-        _local.dbh = psycopg2.connect(host=_HOST, port=_PORT,
+        _local.dbh = psycopg2.connect(
+            host=_HOST, port=_PORT,
             database=_DB, user=_USER, password=_PASS,
             cursor_factory=psycopg2.extras.DictCursor)
         _local.trans = 0
