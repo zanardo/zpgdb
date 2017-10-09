@@ -7,7 +7,7 @@ with open('zpgdb.py', 'r') as fp:
     version = re.search(r"^__VERSION__ = '(.+?)'$", fp.read(),
                         re.MULTILINE).group(1)
 if not version:
-    raise RuntimeError(u"Error getting version!")
+    raise RuntimeError("Error getting version!")
 
 
 setup(
