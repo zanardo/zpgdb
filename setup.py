@@ -14,7 +14,7 @@ setup(
     name="zpgdb",
     version=version,
     py_modules=['zpgdb'],
-    install_requires=['psycopg2==2.6.2'],
+    install_requires=['psycopg2>=2.7.0,<=2.7.999'],
     package_data={
         '': ['README.md', 'COPYING']
     },
