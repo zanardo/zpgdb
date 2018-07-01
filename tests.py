@@ -1,11 +1,11 @@
 # To run these tests, first create a file named tests_config.py, with
 # configurations pointing to a PostgreSQL database used for the tests
 # (the database will be modified!), with this syntax:
-# HOST = 127.0.0.1
+# HOST = "127.0.0.1"
 # PORT = 5432
-# USER = postgres
-# PASS = postgres_password
-# DB = SomeTestDatabase
+# USER = "postgres"
+# PASS = "postgres_password"
+# DB = "SomeTestDatabase"
 #
 
 import unittest
