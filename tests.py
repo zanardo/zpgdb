@@ -16,8 +16,10 @@ import zpgdb as db
 
 from uuid import uuid4
 
+
 def rand():
     return 'tmp_' + str(uuid4()).replace('-', '')
+
 
 class TestDb(unittest.TestCase):
 
