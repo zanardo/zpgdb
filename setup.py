@@ -6,7 +6,7 @@ from setuptools import setup
 version = ""
 with open("zpgdb.py", "r") as fp:
     version = re.search(
-        r"^__VERSION__ = '(.+?)'$", fp.read(), re.MULTILINE
+        r"^__VERSION__ = \"(.+?)\"$", fp.read(), re.MULTILINE
     ).group(1)
 if not version:
     raise RuntimeError("Error getting version!")
