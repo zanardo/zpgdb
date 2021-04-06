@@ -11,16 +11,19 @@ with open("zpgdb.py", "r") as fp:
 if not version:
     raise RuntimeError("Error getting version!")
 
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
 setup(
     name="zpgdb",
     version=version,
     py_modules=["zpgdb"],
     install_requires=["psycopg2"],
-    package_data={"": ["README.md", "COPYING"]},
     author="Antonio Zanardo",
     author_email="zanardo@gmail.com",
     description="Library for simple PostgreSQL connection and transaction management",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     license="BSD",
     keywords="postgresql database transaction connection",
     url="https://github.com/zanardo/zpgdb",
