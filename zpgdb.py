@@ -11,7 +11,6 @@ from time import sleep
 
 import psycopg2
 import psycopg2.extras
-from psycopg2.connect import connection
 
 log = logging.getLogger(__name__)
 logFormat = logging.Formatter(
@@ -52,7 +51,7 @@ def config_connection(
     _DB = database
 
 
-def getdb() -> connection:
+def getdb() -> psycopg2.extensions.connection:
     """
     Returns a database connection handlers. Reuse thread-local connections.
     """
