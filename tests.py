@@ -9,20 +9,19 @@
 #
 
 import unittest
+from uuid import uuid4
+
 import psycopg2
 
 import tests_config
 import zpgdb as db
 
-from uuid import uuid4
-
 
 def rand():
-    return 'tmp_' + str(uuid4()).replace('-', '')
+    return "tmp_" + str(uuid4()).replace("-", "")
 
 
 class TestDb(unittest.TestCase):
-
     def test_getdb(self):
         "Make connection"
         dbh = db.getdb()
@@ -45,7 +44,7 @@ class TestDb(unittest.TestCase):
         with db.trans() as c:
             c.execute("select test from " + tbl + " limit 1")
             r = c.fetchone()
-            self.assertEqual(r[0], 'test')
+            self.assertEqual(r[0], "test")
 
     def test_trans_rollback(self):
         "Test transaction with rollback"
@@ -62,8 +61,12 @@ class TestDb(unittest.TestCase):
             self.assertIs(r, None)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     db.config_connection(
-        tests_config.HOST, tests_config.PORT,
-        tests_config.USER, tests_config.PASS, tests_config.DB)
+        tests_config.HOST,
+        tests_config.PORT,
+        tests_config.USER,
+        tests_config.PASS,
+        tests_config.DB,
+    )
     unittest.main()

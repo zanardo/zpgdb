@@ -4,7 +4,6 @@ wrap transactions, dealing with disconnects, etc"""
 
 import logging
 import threading
-
 from contextlib import contextmanager
 from time import sleep
 
@@ -13,8 +12,9 @@ import psycopg2.extras
 
 log = logging.getLogger(__name__)
 logFormat = logging.Formatter(
-    fmt='%(asctime)s.%(msecs)03d %(levelname).3s | %(name)s | %(message)s',
-    datefmt='%Y/%m/%d %H:%M:%S')
+    fmt="%(asctime)s.%(msecs)03d %(levelname).3s | %(name)s | %(message)s",
+    datefmt="%Y/%m/%d %H:%M:%S",
+)
 log.setLevel(logging.WARNING)
 logHandler = logging.StreamHandler()
 logHandler.setFormatter(logFormat)
@@ -22,12 +22,13 @@ log.addHandler(logHandler)
 
 # log.setLevel(logging.DEBUG)
 
-__VERSION__ = '0.4.2'
-__AUTHOR__ = 'Antonio Zanardo <zanardo@gmail.com>'
+__VERSION__ = "0.4.2"
+__AUTHOR__ = "Antonio Zanardo <zanardo@gmail.com>"
 
 _HOST = _PORT = _DB = _USER = _PASS = None
 
 _local = threading.local()
+
 
 def config_connection(host, port, user, password, database):
     log.debug("configuring connection:")
@@ -42,20 +43,26 @@ def config_connection(host, port, user, password, database):
     _PASS = password
     _DB = database
 
+
 def getdb():
-    if not hasattr(_local, 'dbh'):
+    if not hasattr(_local, "dbh"):
         log.debug("opening a new database connection")
         _local.dbh = psycopg2.connect(
-            host=_HOST, port=_PORT,
-            database=_DB, user=_USER, password=_PASS,
-            cursor_factory=psycopg2.extras.DictCursor)
+            host=_HOST,
+            port=_PORT,
+            database=_DB,
+            user=_USER,
+            password=_PASS,
+            cursor_factory=psycopg2.extras.DictCursor,
+        )
         _local.trans = 0
     else:
         log.debug("reusing database connection %s", id(_local.dbh))
     return _local.dbh
 
+
 def deldbh():
-    if hasattr(_local, 'dbh'):
+    if hasattr(_local, "dbh"):
         log.debug("forcing disconnection of %s", id(_local.dbh))
         try:
             _local.dbh.close()
@@ -63,11 +70,12 @@ def deldbh():
             pass
         del _local.dbh
 
+
 @contextmanager
 def trans():
     log.debug("starting new trans() context")
 
-    if not hasattr(_local, 'trans'):
+    if not hasattr(_local, "trans"):
         _local.trans = 0
 
     if _local.trans == 0:
@@ -80,7 +88,7 @@ def trans():
                 log.debug("checking if database connection is alive")
                 dbh = getdb()
                 c = dbh.cursor()
-                c.execute('select 1')
+                c.execute("select 1")
                 c.fetchone()
             except psycopg2.Error:
                 log.debug("database connection is lost")

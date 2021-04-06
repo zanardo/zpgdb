@@ -1,11 +1,13 @@
 import re
+
 from setuptools import setup
 
 # argh!
 version = ""
 with open("zpgdb.py", "r") as fp:
-    version = re.search(r"^__VERSION__ = '(.+?)'$", fp.read(),
-                        re.MULTILINE).group(1)
+    version = re.search(
+        r"^__VERSION__ = '(.+?)'$", fp.read(), re.MULTILINE
+    ).group(1)
 if not version:
     raise RuntimeError("Error getting version!")
 
@@ -15,9 +17,7 @@ setup(
     version=version,
     py_modules=["zpgdb"],
     install_requires=["psycopg2>=2.7.0,<=2.7.999"],
-    package_data={
-        "": ["README.md", "COPYING"]
-    },
+    package_data={"": ["README.md", "COPYING"]},
     author="Antonio Zanardo",
     author_email="zanardo@gmail.com",
     description="Library for simple PostgreSQL connection and transaction management",
