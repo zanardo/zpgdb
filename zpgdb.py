@@ -1,6 +1,8 @@
-"""This module provides a thin wrapper to access a PostgreSQL database,
-with functions to create a connection per thread, context managers to
-wrap transactions, dealing with disconnects, etc"""
+"""
+This module provides a thin wrapper to access a PostgreSQL database, with
+functions to create a connection per thread, context managers to wrap
+transactions, dealing with disconnects, etc.
+"""
 
 import logging
 import threading
@@ -9,6 +11,7 @@ from time import sleep
 
 import psycopg2
 import psycopg2.extras
+from psycopg2.connect import connection
 
 log = logging.getLogger(__name__)
 logFormat = logging.Formatter(
@@ -30,7 +33,12 @@ _HOST = _PORT = _DB = _USER = _PASS = None
 _local = threading.local()
 
 
-def config_connection(host, port, user, password, database):
+def config_connection(
+    host: str, port: int, user: str, password: str, database: str
+):
+    """
+    Configures the connection parameters
+    """
     log.debug("configuring connection:")
     log.debug("  host = %s", host)
     log.debug("  port = %d", port)
@@ -44,7 +52,10 @@ def config_connection(host, port, user, password, database):
     _DB = database
 
 
-def getdb():
+def getdb() -> connection:
+    """
+    Returns a database connection handlers. Reuse thread-local connections.
+    """
     if not hasattr(_local, "dbh"):
         log.debug("opening a new database connection")
         _local.dbh = psycopg2.connect(
@@ -62,6 +73,9 @@ def getdb():
 
 
 def deldbh():
+    """
+    Forces a database disconnection.
+    """
     if hasattr(_local, "dbh"):
         log.debug("forcing disconnection of %s", id(_local.dbh))
         try:
@@ -73,6 +87,9 @@ def deldbh():
 
 @contextmanager
 def trans():
+    """
+    Wraps a transaction.
+    """
     log.debug("starting new trans() context")
 
     if not hasattr(_local, "trans"):
